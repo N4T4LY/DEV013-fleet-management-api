@@ -7,7 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +28,7 @@
     "esbuild-register": "^3.5.0",
     "nodemon": "^3.1.0",
     "prisma": "^5.12.1",
+    "standard": "^17.1.0",
     "typescript": "^5.4.5"
   }
 }
