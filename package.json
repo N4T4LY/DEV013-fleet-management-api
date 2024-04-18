@@ -1,0 +1,32 @@
+{
+  "name": "dev013-fleet-management-api",
+  "version": "1.0.0",
+  "description": "* [1. Preámbulo](#1-preámbulo)\r * [2. Resumen del proyecto](#2-resumen-del-proyecto)\r * [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)\r * [4. Consideraciones generales](#4-consideraciones-generales)\r * [5. Criterios de aceptación del proyecto](#5-criterios-de-aceptación-del-proyecto)\r * [6. Stack de tecnologías](#6-stack-de-tecnologías)\r * [7. Pistas, tips y lecturas complementarias](#7-pistas-tips-y-lecturas-complementarias)\r * [8. Funcionalidades opcionales](#8-funcionalidades-opcionales)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.12.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.0.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "esbuild-register": "^3.5.0",
+    "nodemon": "^3.1.0",
+    "prisma": "^5.12.1",
+    "typescript": "^5.4.5"
+  }
+}
