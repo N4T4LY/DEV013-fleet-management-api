@@ -9,15 +9,15 @@ datasource db {
 
 model taxis {
   id           Int            @id
-  plate        String?        @db.VarChar(255)
+  plate        String         @db.VarChar(255)
   trajectories trajectories[]
 }
 
 model trajectories {
   id        Int       @id @default(autoincrement())
-  taxi_id   Int?
+  taxi_id   Int
   date      DateTime? @db.Time(6)
   latitude  Float?
   longitude Float?
-  taxis     taxis?    @relation(fields: [taxi_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "taxi_id")
+  taxis     taxis     @relation(fields: [taxi_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "taxi_id")
 }
