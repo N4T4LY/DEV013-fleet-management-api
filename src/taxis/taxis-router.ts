@@ -17,7 +17,6 @@ taxisRouter.get("/", async (request:Request,response: Response)=>{
     }
 })
 
-
 //GET un solo taxi por id
 taxisRouter.get("/:id",async(request: Request, response:Response)=>{
     const id:number = parseInt(request.params.id,10)
@@ -37,8 +36,6 @@ taxisRouter.get("/:id",async(request: Request, response:Response)=>{
         return response.status(500).json(error.message)
     }
 })
-
-
 
 //POST: create taxi
 taxisRouter.post("/",
@@ -78,7 +75,6 @@ async(request: Request, response: Response)=>{
             return response.status(500).json(error.message);
         }
 })
-
 
 //delete  
 
