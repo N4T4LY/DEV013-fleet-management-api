@@ -37,3 +37,25 @@ taxisRouter.get("/:id",async(request: Request, response:Response)=>{
         return response.status(500).json(error.message)
     }
 })
+
+
+
+//POST: create taxi
+taxisRouter.post("/",
+    body("plate").isString(),
+    async(request:Request, response:Response)=>{
+        const errors=validationResult(request);
+        if(!errors.isEmpty()){
+            return response.status(400).json({ errors: errors.array()})
+        }
+        try{
+            const taxi = request.body
+            const newTaxi=await taxisService.createTaxi(taxi)
+            return response.status(201).json(newTaxi)
+    
+        }catch(error: any){
+            return response.status(500).json(error.message)
+            
+        }
+    }
+)
