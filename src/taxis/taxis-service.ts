@@ -58,3 +58,11 @@ export const createTaxi = async (
     })
 
     }
+
+    export const deleteTaxi = async (id:number): Promise<void>=>{
+        await db.taxis.delete({
+            where:{
+                id,
+            }
+        })
+    }
