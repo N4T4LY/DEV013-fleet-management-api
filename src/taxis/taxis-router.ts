@@ -59,3 +59,22 @@ taxisRouter.post("/",
         }
     }
 )
+
+//update
+taxisRouter.put(
+    "/:id", 
+    body("plate").isString(),
+async(request: Request, response: Response)=>{
+    const errors=validationResult(request);
+        if(!errors.isEmpty()){
+            return response.status(400).json({ errors: errors.array()})
+        }
+        const id:number = parseInt(request.params.id,10)
+        try{
+            const taxi=request.body
+            const updateTaxi = await taxisService.updateTaxi(taxi,id)
+            return response.status(200).json(updateTaxi)
+        }catch(error: any){
+            return response.status(500).json(error.message);
+        }
+})
