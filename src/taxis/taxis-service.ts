@@ -12,3 +12,12 @@ export const listTaxis =async ():Promise<Taxis[]> => {
         },
     })
 }
+
+
+export const getTaxi = async(id: number):Promise<Taxis|null>=>{
+    return db.taxis.findUnique({
+        where:{
+            id:id,
+        }
+    })
+}
