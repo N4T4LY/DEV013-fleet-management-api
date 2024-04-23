@@ -16,3 +16,24 @@ taxisRouter.get("/", async (request:Request,response: Response)=>{
 
     }
 })
+
+
+//GET un solo taxi por id
+taxisRouter.get("/:id",async(request: Request, response:Response)=>{
+    const id:number = parseInt(request.params.id,10)
+    console.log(id,"taxi id")
+    try {
+        
+        const taxi = await taxisService.getTaxi(id)
+        console.log(taxi,"taxi")
+        if(taxi){
+
+            return response.status(200).json(taxi)
+        }else{
+
+            return response.status(404).json("Taxi no encontrado")
+        }
+    } catch (error:any) {
+        return response.status(500).json(error.message)
+    }
+})
