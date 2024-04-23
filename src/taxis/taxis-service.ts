@@ -21,3 +21,21 @@ export const getTaxi = async(id: number):Promise<Taxis|null>=>{
         }
     })
 }
+
+
+export const createTaxi = async (
+    taxi: Omit<Taxis, "id"> & { id: number }
+  ): Promise<Taxis> => {
+    const { id, plate } = taxi;
+  
+    return db.taxis.create({
+      data: {
+        id,
+        plate,
+      },
+      select: {
+        id: true,
+        plate: true,
+      },
+    });
+  };
