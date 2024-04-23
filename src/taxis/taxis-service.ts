@@ -39,3 +39,22 @@ export const createTaxi = async (
       },
     });
   };
+
+  
+ export const updateTaxi = async( 
+    taxi:Omit<Taxis,"id">,
+    id:number):Promise<Taxis>=>{
+        const {plate} = taxi;
+
+    return db.taxis.update({
+        where:{
+            id:id,
+        },
+        data:taxi,
+        select:{
+            id:true,
+            plate:true,
+        }
+    })
+
+    }
