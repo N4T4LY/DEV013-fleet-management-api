@@ -78,3 +78,19 @@ async(request: Request, response: Response)=>{
             return response.status(500).json(error.message);
         }
 })
+
+
+//delete  
+
+taxisRouter.delete("/:id", async (request: Request, response: Response) => {
+    const id: number = parseInt(request.params.id, 10);
+    console.log("id", id);
+    
+    try {
+        await taxisService.deleteTaxi(id)
+        return response.status(204).json({msg: "El taxi fue eliminado correctamente"});
+       
+    } catch (error: any) {
+        return response.status(500).json(error.message);
+    }
+});
