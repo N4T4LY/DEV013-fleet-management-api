@@ -49,4 +49,6 @@ export const trajectoriesRouter = express.Router()
  *     - name: Trajectories Query 
  *       description: Query endpoints
  */
+
+
 trajectoriesRouter.get("/",getLastReportedLocations);
