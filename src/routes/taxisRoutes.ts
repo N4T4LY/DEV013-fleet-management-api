@@ -105,6 +105,50 @@ taxisRouter.get("/", getTaxis);
  *                msg: "Internal server error"
  */
 taxisRouter.get("/:id", getTaxi);
+/**
+ * @swagger
+ *  /taxis/{id}:
+ *    get:
+ *      summary: Get data of a specific taxi
+ *      tags:
+ *         [Taxis]
+ *      parameters:
+ *        - $ref: '#/components/parameters/taxiId'
+ *      responses:
+ *        200:
+ *          description: The taxi was found
+ *          content:
+ *            application/json:
+ *              schema:
+ *               $ref: '#/components/schemas/Taxis'
+ *          
+ *        400:
+ *          description: Invalid id
+ *          content:
+ *            application/json:
+ *              schema:
+ *              type: object
+ *              properties:
+ *                msg: string
+ *              example:
+ *                msg: "Invalid id"
+ *        404: 
+ *          description: Taxi not found
+ *          content:
+ *            application/json:
+ *              schema:
+ *               $ref: '#/components/schemas/TaxiNotFound'
+ *        500:
+ *          description: Internal server error
+ *          content:
+ *            application/json:
+ *              schema:
+ *              type: object
+ *              properties:
+ *                msg: string
+ *              example:
+ *                msg: "Internal server error"
+ */
 taxisRouter.post(
   "/",
   body("plate").isString(),
