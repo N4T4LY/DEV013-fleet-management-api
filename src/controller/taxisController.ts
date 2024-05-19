@@ -74,3 +74,26 @@ export const getTaxi = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+export const createTaxi = async (req: Request, res: Response) => {
+  const { id, plate } = req.body;
+
+  if (!id || !plate) {
+    return res
+      .status(400)
+      .json({ error: "The'id' and 'plate' data are required" });
+  }
+
+  const newTaxi = await prisma.taxis.create({
+    data: {
+      id,
+      plate,
+    },
+    select: {
+      id: true,
+      plate: true,
+    },
+  });
+
+  return res.status(201).json(newTaxi);
+};
