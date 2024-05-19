@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express"
-import { body, validationResult } from "express-validator"
-import { getTrayectoriesByTaxi, getLastReportedLocations } from "../controller/trajectoriesController"
+import { getLastReportedLocations } from "../controller/trajectoriesController"
 
 export const trajectoriesRouter = express.Router()
 /**
@@ -41,7 +40,6 @@ export const trajectoriesRouter = express.Router()
  *           plate: "BAJW-7971"
  */
 
-
                 
 /**
  * @swagger
@@ -49,8 +47,6 @@ export const trajectoriesRouter = express.Router()
  *     - name: Trajectories Query 
  *       description: Query endpoints
  */
-
-
 trajectoriesRouter.get("/",getLastReportedLocations);
 
 /**
@@ -70,7 +66,7 @@ trajectoriesRouter.get("/",getLastReportedLocations);
  *              schema:
  *                  type: array
  *                  items:
- *                      $ref: '#/components/schemas/Trayectories'
+ *                      $ref: '#/components/schemas/Trajectories'
  *        500:
  *          description: Internal server error
  *          content:
