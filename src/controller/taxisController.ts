@@ -47,12 +47,10 @@ export const getTaxis = async (req: Request, res: Response) => {
   }
 };
 
-
 export const getTaxi = async (req: Request, res: Response) => {
   try {
     const id: number = parseInt(req.params.id, 10);
 
- 
     if (!id || id <= 0 || isNaN(id)) {
       return res
         .status(400)
@@ -98,20 +96,17 @@ export const createTaxi = async (req: Request, res: Response) => {
   return res.status(201).json(newTaxi);
 };
 
-
 export const updateTaxi = async (req: Request, res: Response) => {
   try {
     const id: number = parseInt(req.params.id, 10);
     const { plate } = req.body;
 
-   
     if (!id || id <= 0 || isNaN(id)) {
       return res
         .status(400)
         .json({ error: "The ID must be a positive integer" });
     }
 
-   
     if (!plate) {
       return res.status(400).json({ error: "the 'plate' data is required" });
     }
@@ -139,7 +134,6 @@ export const deleteTaxi = async (req: Request, res: Response) => {
   try {
     const id: number = parseInt(req.params.id, 10);
 
-   
     if (!id || id <= 0) {
       return res
         .status(400)
