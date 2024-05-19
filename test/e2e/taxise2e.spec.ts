@@ -45,3 +45,11 @@ describe('POST /taxis', () => {
     expect(response.status).toBe(400);
   });
 });
+
+
+describe('PUT /taxis/:id', () => {
+  it('should return 400 if plate is missing', async () => {
+    const response = await request(app).put('/taxis/1').send({});
+    expect(response.status).toBe(400);
+  });
+});
