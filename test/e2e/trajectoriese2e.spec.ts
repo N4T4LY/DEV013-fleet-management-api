@@ -45,7 +45,6 @@ describe("GET /taxis/trajectories/:taxiId", () => {
  
 });
 
-
 describe("GET /trajectories", () => {
   it('should get taxis', async () => {
     const response = await request(app).get('/trajectories?limit=11&page=0');
