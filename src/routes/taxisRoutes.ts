@@ -64,6 +64,46 @@ export const taxisRouter = express.Router();
 
 
 taxisRouter.get("/", getTaxis);
+/**
+ *
+ * @swagger
+ *  /taxis:
+ *    get:
+ *      summary: Return a Taxis list
+ *      tags:
+ *        [Taxis]
+ *      parameters:
+ *        - in: query
+ *          name: limit
+ *          schema: 
+ *            type: integer
+ *          description: Numbers of elements per page
+ *        - in: query
+ *          name: page
+ *          schema:
+ *            type: integer
+ *          description: Page of the list to consult
+ *      responses:
+ *        200:
+ *          description: List of taxis successfully obtained
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/Taxis'
+ *                 
+ *        500:
+ *          description: Internal server error
+ *          content:
+ *            application/json:
+ *              schema:
+ *              type: object
+ *              properties:
+ *                msg: string
+ *              example:
+ *                msg: "Internal server error"
+ */
 taxisRouter.get("/:id", getTaxi);
 taxisRouter.post(
   "/",
