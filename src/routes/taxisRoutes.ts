@@ -259,3 +259,37 @@ taxisRouter.delete("/:id", deleteTaxi);
  *      
  */
 taxisRouter.get('/trajectories/:taxiId', getTrayectoriesByTaxi);
+/**
+ * @swagger
+ * /taxis/trajectories/{id}:
+ *  get:
+ *    summary: Return Trajectories By Taxi id
+ *    tags:
+ *      [Trajectories Query]
+ *    parameters:
+ *      - in: query
+ *        name: limit
+ *        schema:
+ *          type: integer
+ *        description: Numbers of elements per page
+ *      - in: query
+ *        name: page
+ *        schema:
+ *          type: integer
+ *        description: Page of the list to consult
+ *      - $ref: '#/components/parameters/taxiId'
+ *      - in: query
+ *        name: date
+ *        schema:
+ *          format: date
+ *          type: string
+ *        description: Date for which you want to obtain the trajectories
+ * 
+ *    responses:
+ *      200:
+ *        description: The taxis were found
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Taxis'
+ */ 
