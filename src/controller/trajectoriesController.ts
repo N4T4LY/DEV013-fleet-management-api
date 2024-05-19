@@ -2,7 +2,6 @@ import { PrismaClient } from "@prisma/client";
 import prisma from "../utils/dbServer";
 import { Request, Response } from "express";
 
-
 export const getTrayectoriesByTaxi = async (req: Request, res: Response) => {
   const taxiId: number = parseInt(req.params.taxiId, 10);
   const dateString = req.query.date as string;
@@ -64,7 +63,6 @@ export const getTrayectoriesByTaxi = async (req: Request, res: Response) => {
     res.status(500).json({ error: "there was an error on the server" });
   }
 };
-
 
 export const getLastReportedLocations = async (req: Request, res: Response) => {
   try {
