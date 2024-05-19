@@ -16,7 +16,7 @@ model taxis {
 model trajectories {
   id        Int       @id @default(autoincrement())
   taxi_id   Int
-  date      DateTime? @db.Time(6)
+  date      DateTime? @db.Timestamp(6)
   latitude  Float?
   longitude Float?
   taxis     taxis     @relation(fields: [taxi_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "taxi_id")
