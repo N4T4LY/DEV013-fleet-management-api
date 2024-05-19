@@ -1,5 +1,6 @@
 import request from "supertest"
 import app from "../../src/app"
+
 describe('GET /taxis', () => {
   it('should get taxis', async () => {
     const response = await request(app).get('/taxis?limit=11&page=0');
@@ -25,7 +26,6 @@ describe('GET /taxis', () => {
   
 });
 
-
 describe('GET /taxis/:id', () => {
   it('should return 400 if id is not a positive integer', async () => {
     const response = await request(app).get('/taxis/-5');
@@ -38,14 +38,12 @@ describe('GET /taxis/:id', () => {
   });
 });
 
-
 describe('POST /taxis', () => {
   it('should return 400 if required fields are missing', async () => {
     const response = await request(app).post('/taxis').send({});
     expect(response.status).toBe(400);
   });
 });
-
 
 describe('PUT /taxis/:id', () => {
   it('should return 400 if plate is missing', async () => {
