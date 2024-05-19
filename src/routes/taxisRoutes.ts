@@ -52,6 +52,17 @@ export const taxisRouter = express.Router();
  * 
  */ 
 
+
+/**
+ * @swagger
+ * tags:
+ *    - name: Taxis
+ *      description: Taxis endpoints
+ *    - name: Trajectories Query 
+ *      description: Query endpoints
+ */
+
+
 taxisRouter.get("/", getTaxis);
 taxisRouter.get("/:id", getTaxi);
 taxisRouter.post(
