@@ -64,3 +64,56 @@ export const getTrayectoriesByTaxi = async (req: Request, res: Response) => {
     res.status(500).json({ error: "there was an error on the server" });
   }
 };
+
+
+export const getLastReportedLocations = async (req: Request, res: Response) => {
+  try {
+    const { limit, page } = req.query;
+
+    let parsedLimit = 10;
+    let parsedPage = 0;
+
+    if (limit) {
+      parsedLimit = parseInt(limit as string, 10);
+      if (parsedLimit < 0) {
+        return res
+          .status(400)
+          .json({ error: "The value of 'limit' must be a positive integer" });
+      }
+    }
+
+    if (page) {
+      parsedPage = parseInt(page as string, 10);
+      if (parsedPage < 0) {
+        return res
+          .status(400)
+          .json({ error: "The value of 'page' must be a positive integer" });
+      }
+    }
+
+    if (!limit || !page) {
+      return res
+        .status(400)
+        .json({ error: "limit and page data are required" });
+    }
+    const lastReportedLocations = await prisma.trajectories.findMany({
+      select: {
+        latitude: true,
+        longitude: true,
+        taxi_id: true,
+        date: true,
+      },
+      skip: parsedPage,
+      take: parsedLimit,
+      orderBy: {
+        date: "desc",
+      },
+      distinct: ["taxi_id"],
+    });
+
+    return res.status(200).json(lastReportedLocations);
+  } catch (error) {
+    
+    res.status(500).json({ error: "there was an error on the server" });
+  }
+};
