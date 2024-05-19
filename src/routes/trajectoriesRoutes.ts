@@ -52,3 +52,34 @@ export const trajectoriesRouter = express.Router()
 
 
 trajectoriesRouter.get("/",getLastReportedLocations);
+
+/**
+ * @swagger
+ * /trajectories:
+ *    get:
+ *      summary: List the last reported locations of taxis
+ *      description: List the last reported locations of taxis
+ *      tags: 
+ *        [Trajectories Query]
+ *                    
+ *      responses:
+ *        200:
+ *          description: query successful
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  type: array
+ *                  items:
+ *                      $ref: '#/components/schemas/Trayectories'
+ *        500:
+ *          description: Internal server error
+ *          content:
+ *            application/json:
+ *              schema:
+ *              type: object
+ *              properties:
+ *                msg: string
+ *              example:
+ *                msg: "Internal server error"
+ *      
+ */
