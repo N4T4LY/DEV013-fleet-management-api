@@ -46,3 +46,31 @@ export const getTaxis = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+
+export const getTaxi = async (req: Request, res: Response) => {
+  try {
+    const id: number = parseInt(req.params.id, 10);
+
+ 
+    if (!id || id <= 0 || isNaN(id)) {
+      return res
+        .status(400)
+        .json({ error: "The ID must be a positive integer" });
+    }
+
+    const taxi = await prisma.taxis.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!taxi) {
+      return res.status(404).json("Taxi not found");
+    }
+
+    return res.status(200).json(taxi);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
