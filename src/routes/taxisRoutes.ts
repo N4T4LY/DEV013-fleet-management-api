@@ -36,3 +36,4 @@ taxisRouter.put(
   }
 );
 taxisRouter.delete("/:id", deleteTaxi);
+taxisRouter.get('/trajectories/:taxiId', getTrayectoriesByTaxi);
