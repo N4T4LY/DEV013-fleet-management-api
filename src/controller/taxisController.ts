@@ -134,3 +134,26 @@ export const updateTaxi = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+export const deleteTaxi = async (req: Request, res: Response) => {
+  try {
+    const id: number = parseInt(req.params.id, 10);
+
+   
+    if (!id || id <= 0) {
+      return res
+        .status(400)
+        .json({ error: "The ID must be a positive integer" });
+    }
+
+    await prisma.taxis.delete({
+      where: {
+        id,
+      },
+    });
+
+    return res.status(204).json({ msg: "The taxi was successfully deleted" });
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
