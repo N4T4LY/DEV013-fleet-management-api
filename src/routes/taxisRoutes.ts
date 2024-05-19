@@ -11,6 +11,47 @@ import {
 import { getTrayectoriesByTaxi } from "../controller/trajectoriesController";
 export const taxisRouter = express.Router();
 
+
+/**
+ * 
+ * @swagger
+ * components:
+ *  schemas:
+ *    Taxis:
+ *      type: object
+ *      properties:
+ *        id: 
+ *          type: integer
+ *          description: The id of the taxi
+ *        plate:
+ *          type: string
+ *          description: The plate of the taxi
+ *      required:
+ *        - id
+ *        - plate
+ *      example:
+ *        id: 85
+ *        plate: "DDAD-8350"
+ *    TaxiNotFound:
+ *      type: object
+ *      properties:
+ *        msg:
+ *          type: string
+ *          description: A message for the not found taxi
+ *        example:
+ *          msg: "Taxi was not found"
+ *          
+ *  parameters:
+ *    taxiId:
+ *      in: path
+ *      name: id
+ *      required: true
+ *      schema:
+ *        type: integer
+ *        description: id of the taxi to query
+ * 
+ */ 
+
 taxisRouter.get("/", getTaxis);
 taxisRouter.get("/:id", getTaxi);
 taxisRouter.post(
