@@ -160,6 +160,40 @@ taxisRouter.post(
     return await createTaxi(req, res);
   }
 );
+
+/**
+ * @swagger
+ * /taxis:
+ *    post:
+ *      summary: Create a new Taxi
+ *      tags: 
+ *        [Taxis]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *               $ref: '#/components/schemas/Taxis'
+ *                
+ *      responses:
+ *        200:
+ *          description: the taxi succesfully created
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Taxis'
+ *        500:
+ *          description: Internal server error
+ *          content:
+ *            application/json:
+ *              schema:
+ *              type: object
+ *              properties:
+ *                msg: string
+ *              example:
+ *                msg: "Internal server error"
+ *      
+ */
 taxisRouter.put(
   "/:id",
   body("plate").isString(),
