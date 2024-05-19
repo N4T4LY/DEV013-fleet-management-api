@@ -205,5 +205,34 @@ taxisRouter.put(
     return await updateTaxi(req, res);
   }
 );
+
+/**
+ * @swagger
+ * /taxis/{id}:
+ *  put:
+ *    summary: Update a taxi by id
+ *    tags: [Taxis]
+ *    parameters:
+ *      -$ref: '#/components/parameters/taxiId'
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Taxis'
+ *    responses:
+ *      200:
+ *        description: Taxi updated succesfully
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Taxis'
+ *      404: 
+ *          description: Taxi not found
+ *          content:
+ *            application/json:
+ *              schema:
+ *               $ref: '#/components/schemas/TaxiNotFound'
+ */
 taxisRouter.delete("/:id", deleteTaxi);
 taxisRouter.get('/trajectories/:taxiId', getTrayectoriesByTaxi);
