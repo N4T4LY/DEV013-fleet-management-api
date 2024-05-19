@@ -24,3 +24,14 @@ taxisRouter.post(
     return await createTaxi(req, res);
   }
 );
+taxisRouter.put(
+  "/:id",
+  body("plate").isString(),
+  async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    return await updateTaxi(req, res);
+  }
+);
