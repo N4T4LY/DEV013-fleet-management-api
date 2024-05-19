@@ -235,4 +235,27 @@ taxisRouter.put(
  *               $ref: '#/components/schemas/TaxiNotFound'
  */
 taxisRouter.delete("/:id", deleteTaxi);
+/**
+ * @swagger
+ * /taxis/{id}:
+ *  delete:
+ *    summary: Delete a taxi by id
+ *    tags: [Taxis]
+ *    parameters:
+ *      - $ref: '#/components/parameters/taxiId'
+ *    responses:
+ *      200:
+ *        description: the taxi was deleted
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Taxis'
+ *      404: 
+ *          description: Taxi not found
+ *          content:
+ *            application/json:
+ *              schema:
+ *               $ref: '#/components/schemas/TaxiNotFound'
+ *      
+ */
 taxisRouter.get('/trajectories/:taxiId', getTrayectoriesByTaxi);
