@@ -3,3 +3,4 @@ import { body, validationResult } from "express-validator"
 import { getTrayectoriesByTaxi, getLastReportedLocations } from "../controller/trajectoriesController"
 
 export const trajectoriesRouter = express.Router()
+trajectoriesRouter.get("/",getLastReportedLocations);
