@@ -117,3 +117,21 @@ export const getLastReportedLocations = async (req: Request, res: Response) => {
     res.status(500).json({ error: "there was an error on the server" });
   }
 };
+
+// export const getTrayectories = async (req: Request, res: Response) => {
+//   try {
+//     const trajectories = await prisma.trajectories.findMany({
+//       select: {
+//         id: true,
+//         taxi_id: true,
+//         date: true,
+//         latitude: true,
+//         longitude: true,
+//       },
+//     });
+//     return trajectories;
+//   } catch (error) {
+//     console.error("Error fetching last reported locations:", error);
+//     res.status(500).json({ error: "there was an error on the server" });
+//   }
+// };
