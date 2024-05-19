@@ -8,7 +8,7 @@ import {
   deleteTaxi,
 } from "../controller/taxisController";
 
-import { getTrayectoriesByTaxi } from "../controller/trajectoriesController";
+import { getTrajectoriesByTaxi } from "../controller/trajectoriesController";
 export const taxisRouter = express.Router();
 
 /**
@@ -259,7 +259,7 @@ taxisRouter.delete("/:id", deleteTaxi);
 
 
 
-taxisRouter.get('/trajectories/:taxiId', getTrayectoriesByTaxi);
+taxisRouter.get('/trajectories/:taxiId', getTrajectoriesByTaxi);
 /**
  * @swagger
  * /taxis/trajectories/{id}:

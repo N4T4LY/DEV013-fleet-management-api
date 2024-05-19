@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import prisma from "../utils/dbServer";
 import { Request, Response } from "express";
 
-export const getTrayectoriesByTaxi = async (req: Request, res: Response) => {
+export const getTrajectoriesByTaxi = async (req: Request, res: Response) => {
   const taxiId: number = parseInt(req.params.taxiId, 10);
   const dateString = req.query.date as string;
 
