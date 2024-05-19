@@ -24,3 +24,16 @@ describe('GET /taxis', () => {
 
   
 });
+
+
+describe('GET /taxis/:id', () => {
+  it('should return 400 if id is not a positive integer', async () => {
+    const response = await request(app).get('/taxis/-5');
+    expect(response.status).toBe(400);
+  });
+
+  it('should return 404 if taxi with id does not exist', async () => {
+    const response = await request(app).get('/taxis/999');
+    expect(response.status).toBe(404);
+  });
+});
