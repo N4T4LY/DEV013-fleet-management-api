@@ -11,7 +11,6 @@ import {
 import { getTrayectoriesByTaxi } from "../controller/trajectoriesController";
 export const taxisRouter = express.Router();
 
-
 /**
  * 
  * @swagger
@@ -205,7 +204,6 @@ taxisRouter.put(
     return await updateTaxi(req, res);
   }
 );
-
 /**
  * @swagger
  * /taxis/{id}:
@@ -258,6 +256,9 @@ taxisRouter.delete("/:id", deleteTaxi);
  *               $ref: '#/components/schemas/TaxiNotFound'
  *      
  */
+
+
+
 taxisRouter.get('/trajectories/:taxiId', getTrayectoriesByTaxi);
 /**
  * @swagger
@@ -292,4 +293,4 @@ taxisRouter.get('/trajectories/:taxiId', getTrayectoriesByTaxi);
  *          application/json:
  *            schema:
  *              $ref: '#/components/schemas/Taxis'
- */ 
+ */   
