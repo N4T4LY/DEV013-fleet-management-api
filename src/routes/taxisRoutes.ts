@@ -35,3 +35,4 @@ taxisRouter.put(
     return await updateTaxi(req, res);
   }
 );
+taxisRouter.delete("/:id", deleteTaxi);
