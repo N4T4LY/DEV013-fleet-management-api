@@ -37,3 +37,11 @@ describe('GET /taxis/:id', () => {
     expect(response.status).toBe(404);
   });
 });
+
+
+describe('POST /taxis', () => {
+  it('should return 400 if required fields are missing', async () => {
+    const response = await request(app).post('/taxis').send({});
+    expect(response.status).toBe(400);
+  });
+});
