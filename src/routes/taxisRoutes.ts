@@ -13,6 +13,3 @@ export const taxisRouter = express.Router();
 
 taxisRouter.get("/", getTaxis);
 taxisRouter.get("/:id", getTaxi);
-
-
-taxisRouter.delete("/:id", deleteTaxi);
