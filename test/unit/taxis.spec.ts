@@ -82,3 +82,22 @@ describe('getTaxis', () => {
     expect(mockRes.json).toHaveBeenCalledWith({ error: 'Internal Server Error' });
   });
 });
+
+describe('getTaxi', () => {
+  it('should return the taxi for a valid ID', async () => {
+    const mockTaxi = { id: 1, plate: 'ABC123' };
+    const mockReq = { params: { id: '1' } } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+    (prisma.taxis.findUnique as jest.Mock).mockResolvedValue(mockTaxi);
+
+    await getTaxi(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(200);
+    expect(mockRes.json).toHaveBeenCalledWith(mockTaxi);
+    expect(prisma.taxis.findUnique).toHaveBeenCalledWith({
+      where: { id: 1 }, // Eliminado `select` aquí
+    });
+  });
+  
+})
