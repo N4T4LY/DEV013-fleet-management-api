@@ -158,3 +158,16 @@ describe('createTaxi', () => {
     expect(mockRes.json).toHaveBeenCalledWith(mockNewTaxi);
   });
 });
+
+
+describe('updateTaxi', () => {
+  it('should return 400 if ID is not valid', async () => {
+    const mockReq = { params: { id: 'invalid' }, body: { plate: 'ABC123' } } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+    await updateTaxi(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(400);
+    expect(mockRes.json).toHaveBeenCalledWith({ error: "The ID must be a positive integer" });
+  });
+})
