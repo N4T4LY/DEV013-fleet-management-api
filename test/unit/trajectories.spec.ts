@@ -45,4 +45,16 @@ describe('getTrajectoriesByTaxi', () => {
     expect(mockRes.status).toHaveBeenCalledWith(200);
     expect(mockRes.json).toHaveBeenCalledWith(mockTrajectories);
   });
+
+  it('should return 500 if there is an internal server error', async () => {
+    const mockReq = { params: { taxiId: '1' }, query: { date: '2024-05-15', limit: '10', page: '1' } } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+    (prisma.trajectories.findMany as jest.Mock).mockRejectedValue(new Error('Internal Server Error'));
+
+    await getTrajectoriesByTaxi(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(500);
+    expect(mockRes.json).toHaveBeenCalledWith({ error: "there was an error on the server" });
+  });
 })
