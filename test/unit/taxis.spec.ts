@@ -83,6 +83,7 @@ describe('getTaxis', () => {
   });
 });
 
+
 describe('getTaxi', () => {
   it('should return the taxi for a valid ID', async () => {
     const mockTaxi = { id: 1, plate: 'ABC123' };
@@ -135,6 +136,7 @@ describe('getTaxi', () => {
   });
 });
 
+
 describe('createTaxi', () => {
   it('should return 400 if id or plate are missing', async () => {
     const mockReq = { body: {} } as unknown as Request;
@@ -145,6 +147,7 @@ describe('createTaxi', () => {
     expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({ error: "The'id' and 'plate' data are required" });
   });
+
   it('should create a new taxi', async () => {
     const mockReq = { body: { id: 1, plate: 'ABC123' } } as unknown as Request;
     const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
@@ -160,6 +163,7 @@ describe('createTaxi', () => {
 });
 
 
+
 describe('updateTaxi', () => {
   it('should return 400 if ID is not valid', async () => {
     const mockReq = { params: { id: 'invalid' }, body: { plate: 'ABC123' } } as unknown as Request;
@@ -170,6 +174,7 @@ describe('updateTaxi', () => {
     expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({ error: "The ID must be a positive integer" });
   });
+
   it('should return 400 if plate is missing', async () => {
     const mockReq = { params: { id: '1' }, body: {} } as unknown as Request;
     const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
@@ -179,6 +184,7 @@ describe('updateTaxi', () => {
     expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({ error: "the 'plate' data is required" });
   });
+
   it('should update an existing taxi', async () => {
     const mockReq = { params: { id: '1' }, body: { plate: 'DEF456' } } as unknown as Request;
     const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
@@ -191,6 +197,7 @@ describe('updateTaxi', () => {
     expect(mockRes.status).toHaveBeenCalledWith(200);
     expect(mockRes.json).toHaveBeenCalledWith(mockUpdatedTaxi);
   });
+
   it('should return 500 if there is an internal server error', async () => {
     const mockReq = { params: { id: '1' }, body: { plate: 'DEF456' } } as unknown as Request;
     const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
@@ -202,7 +209,7 @@ describe('updateTaxi', () => {
     expect(mockRes.status).toHaveBeenCalledWith(500);
     expect(mockRes.json).toHaveBeenCalledWith({ error: 'Internal Server Error' });
   });
-})
+});
 
 describe('deleteTaxi', () => {
   it('should return 400 if ID is not valid', async () => {
@@ -237,4 +244,4 @@ describe('deleteTaxi', () => {
     expect(mockRes.status).toHaveBeenCalledWith(500);
     expect(mockRes.json).toHaveBeenCalledWith({ error: 'Internal Server Error' });
   });
-})
+});
