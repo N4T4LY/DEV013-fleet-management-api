@@ -18,6 +18,7 @@ jest.mock('../../src/utils/dbServer', () => ({
   },
 }));
 
+//describe: agrupacion de varias pruebas relacionadas, it, define prueba individual
 describe('getTaxis', () => {
   it('should return taxis with pagination', async () => {
     //simulamos la respuesta que esperamos que suceda
@@ -69,5 +70,15 @@ describe('getTaxis', () => {
     expect(mockRes.json).toHaveBeenCalledWith({ error: "The value of 'offset' must be a positive integer" });
   });
 
+  it('should return 500 if there is an internal server error', async () => {
+    const mockReq = { query: { limit: '2', page: '0' } } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
 
-})
+    (prisma.taxis.findMany as jest.Mock).mockRejectedValue(new Error('Internal Server Error'));
+
+    await getTaxis(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(500);
+    expect(mockRes.json).toHaveBeenCalledWith({ error: 'Internal Server Error' });
+  });
+});
