@@ -91,4 +91,15 @@ describe('getLastReportedLocations', () => {
     expect(mockRes.status).toHaveBeenCalledWith(200);
     expect(mockRes.json).toHaveBeenCalledWith(mockLastReportedLocations);
   });
+  it('should return 500 if there is an internal server error', async () => {
+    const mockReq = { query: { limit: '10', page: '1' } } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+    (prisma.trajectories.findMany as jest.Mock).mockRejectedValue(new Error('Internal Server Error'));
+
+    await getLastReportedLocations(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(500);
+    expect(mockRes.json).toHaveBeenCalledWith({ error: "there was an error on the server" });
+  });
 })
