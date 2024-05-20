@@ -79,4 +79,16 @@ describe('getLastReportedLocations', () => {
     expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({ error: "The value of 'limit' must be a positive integer" });
   });
+  it('should return the last reported locations', async () => {
+    const mockReq = { query: { limit: '10', page: '1' } } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+    const mockLastReportedLocations = [{ latitude: 123, longitude: 456, taxi_id: 1, date: new Date() }];
+
+    (prisma.trajectories.findMany as jest.Mock).mockResolvedValue(mockLastReportedLocations);
+
+    await getLastReportedLocations(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(200);
+    expect(mockRes.json).toHaveBeenCalledWith(mockLastReportedLocations);
+  });
 })
