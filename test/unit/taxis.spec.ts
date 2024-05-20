@@ -203,3 +203,15 @@ describe('updateTaxi', () => {
     expect(mockRes.json).toHaveBeenCalledWith({ error: 'Internal Server Error' });
   });
 })
+
+describe('deleteTaxi', () => {
+  it('should return 400 if ID is not valid', async () => {
+    const mockReq = { params: { id: 'invalid' } } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+    await deleteTaxi(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(400);
+    expect(mockRes.json).toHaveBeenCalledWith({ error: "The ID must be a positive integer" });
+  });
+})
