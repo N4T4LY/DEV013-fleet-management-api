@@ -58,4 +58,16 @@ describe('getTaxis', () => {
     expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({ error: "The value of 'limit' must be a positive integer" });
   });
+
+  it('should return 400 if page is negative', async () => {
+    const mockReq = { query: { limit: '2', page: '-1' } } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+    await getTaxis(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(400);
+    expect(mockRes.json).toHaveBeenCalledWith({ error: "The value of 'offset' must be a positive integer" });
+  });
+
+
 })
