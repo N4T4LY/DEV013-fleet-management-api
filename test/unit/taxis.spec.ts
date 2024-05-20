@@ -110,4 +110,16 @@ describe('getTaxi', () => {
     expect(mockRes.json).toHaveBeenCalledWith({ error: "The ID must be a positive integer" }); // Mensaje ajustado aquí
   });
 
+  it('should return 404 if taxi is not found', async () => {
+    const mockReq = { params: { id: '1' } } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+    (prisma.taxis.findUnique as jest.Mock).mockResolvedValue(null);
+
+    await getTaxi(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(404);
+    expect(mockRes.json).toHaveBeenCalledWith("Taxi not found");
+  });
+
 })
