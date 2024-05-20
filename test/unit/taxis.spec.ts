@@ -214,4 +214,15 @@ describe('deleteTaxi', () => {
     expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({ error: "The ID must be a positive integer" });
   });
+
+  it('should delete an existing taxi', async () => {
+    const mockReq = { params: { id: '1' } } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+    await deleteTaxi(mockReq, mockRes);
+
+    expect(prisma.taxis.delete).toHaveBeenCalledWith({ where: { id: 1 } });
+    expect(mockRes.status).toHaveBeenCalledWith(204);
+    expect(mockRes.json).toHaveBeenCalledWith({ msg: "The taxi was successfully deleted" });
+  });
 })
