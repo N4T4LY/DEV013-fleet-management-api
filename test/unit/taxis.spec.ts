@@ -144,4 +144,17 @@ describe('createTaxi', () => {
 
     expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({ error: "The'id' and 'plate' data are required" });
-  });})
+  });
+  it('should create a new taxi', async () => {
+    const mockReq = { body: { id: 1, plate: 'ABC123' } } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+    const mockNewTaxi = { id: 1, plate: 'ABC123' };
+
+    (prisma.taxis.create as jest.Mock).mockResolvedValue(mockNewTaxi);
+
+    await createTaxi(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(201);
+    expect(mockRes.json).toHaveBeenCalledWith(mockNewTaxi);
+  });
+});
