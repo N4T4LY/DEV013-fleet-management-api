@@ -225,4 +225,16 @@ describe('deleteTaxi', () => {
     expect(mockRes.status).toHaveBeenCalledWith(204);
     expect(mockRes.json).toHaveBeenCalledWith({ msg: "The taxi was successfully deleted" });
   });
+
+  it('should return 500 if there is an internal server error', async () => {
+    const mockReq = { params: { id: '1' } } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+    (prisma.taxis.delete as jest.Mock).mockRejectedValue(new Error('Internal Server Error'));
+
+    await deleteTaxi(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(500);
+    expect(mockRes.json).toHaveBeenCalledWith({ error: 'Internal Server Error' });
+  });
 })
