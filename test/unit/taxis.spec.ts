@@ -38,4 +38,14 @@ describe('getTaxis', () => {
       take: 2,
     });
   });
+
+  it('should return 400 if limit or page are not provided', async () => {
+    const mockReq = { query: {} } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+    await getTaxis(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(400);
+    expect(mockRes.json).toHaveBeenCalledWith({ error: 'limit and offset data are required' });
+  });
 })
