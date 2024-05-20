@@ -69,4 +69,14 @@ describe('getLastReportedLocations', () => {
     expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({ error: "limit and page data are required" });
   });
+
+  it('should return 400 if limit or page are not positive numbers', async () => {
+    const mockReq = { query: { limit: '-1', page: '0' } } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+    await getLastReportedLocations(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(400);
+    expect(mockRes.json).toHaveBeenCalledWith({ error: "The value of 'limit' must be a positive integer" });
+  });
 })
