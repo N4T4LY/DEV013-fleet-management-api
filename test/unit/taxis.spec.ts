@@ -179,4 +179,16 @@ describe('updateTaxi', () => {
     expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({ error: "the 'plate' data is required" });
   });
+  it('should update an existing taxi', async () => {
+    const mockReq = { params: { id: '1' }, body: { plate: 'DEF456' } } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+    const mockUpdatedTaxi = { id: 1, plate: 'DEF456' };
+
+    (prisma.taxis.update as jest.Mock).mockResolvedValue(mockUpdatedTaxi);
+
+    await updateTaxi(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(200);
+    expect(mockRes.json).toHaveBeenCalledWith(mockUpdatedTaxi);
+  });
 })
