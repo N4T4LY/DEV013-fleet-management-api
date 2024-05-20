@@ -99,5 +99,15 @@ describe('getTaxi', () => {
       where: { id: 1 }, // Eliminado `select` aquí
     });
   });
-  
+
+  it('should return 400 if ID is not provided', async () => {
+    const mockReq = { params: {} } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+    await getTaxi(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(400);
+    expect(mockRes.json).toHaveBeenCalledWith({ error: "The ID must be a positive integer" }); // Mensaje ajustado aquí
+  });
+
 })
