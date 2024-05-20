@@ -133,5 +133,15 @@ describe('getTaxi', () => {
     expect(mockRes.status).toHaveBeenCalledWith(500);
     expect(mockRes.json).toHaveBeenCalledWith({ error: 'Internal Server Error' });
   });
+});
 
-})
+describe('createTaxi', () => {
+  it('should return 400 if id or plate are missing', async () => {
+    const mockReq = { body: {} } as unknown as Request;
+    const mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown as Response;
+
+    await createTaxi(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(400);
+    expect(mockRes.json).toHaveBeenCalledWith({ error: "The'id' and 'plate' data are required" });
+  });})
