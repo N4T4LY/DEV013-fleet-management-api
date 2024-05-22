@@ -10,7 +10,8 @@
     "test": "jest",
     "test:e2e": "jest test/e2e",
     "test:unit": "jest test/unit/trajectories.spec.ts",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "cli": "ts-node cli.ts"
   },
   "keywords": [],
   "author": "",
@@ -21,8 +22,11 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-validator": "^7.0.1",
+    "pg": "^8.11.5",
+    "prompt-sync": "^4.2.0",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
@@ -30,9 +34,11 @@
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.7",
+    "@types/pg": "^8.11.6",
     "@types/supertest": "^6.0.2",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
+    "@types/yargs": "^17.0.32",
     "esbuild-register": "^3.5.0",
     "eslint": "^8.57.0",
     "jest": "^29.7.0",
